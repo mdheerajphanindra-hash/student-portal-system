@@ -1,0 +1,62 @@
+{
+  "student": {
+    "name": "Syed Nagul Meera",
+    "roll": "RA2111029010001",
+    "branch": "Computer Science Engineering",
+    "shortBranch": "CSE",
+    "year": 2,
+    "email": "john.doe@example.com",
+    "phone": "+91 90000 00000"
+  },
+  "subjects": [
+    {
+      "code": "CS201",
+      "name": "Data Structures",
+      "credits": 4
+    },
+    {
+      "code": "CS202",
+      "name": "Database Systems",
+      "credits": 4
+    },
+    {
+      "code": "MA201",
+      "name": "Mathematics III",
+      "credits": 3
+    },
+    {
+      "code": "CS203",
+      "name": "Operating Systems",
+      "credits": 4
+    },
+    {
+      "code": "CS204",
+      "name": "Python Programming",
+      "credits": 3
+    },
+    {
+      "code": "HS201",
+      "name": "Communicative English",
+      "credits": 2
+    }
+  ],
+  "registered": [
+    "CS201",
+    "CS204",
+    "MA201"
+  ],
+  "timetable": [],
+  "marks": [],
+  "attendance": [],
+  "fees": [],
+  "exams": [],
+  "announcements": [],
+  "notifications": [],
+  "feedback": [
+    {
+      "type": "complaint",
+      "message": "hi",
+      "date": "2025-12-07T06:31:53.120Z"
+    }
+  ]
+}
