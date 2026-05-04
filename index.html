@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SRM Student Portal — Full</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --srm-blue: #0e006c;
+      --srm-yellow: #ffcc00;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --grad: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--grad);
+      min-height: 100vh;
+      color: #111827;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, var(--srm-blue), #003a85);
+      color: white;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background: var(--srm-yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--srm-blue);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    header h1 {
+      font-size: 18px;
+      margin: 0
+    }
+
+    header p {
+      margin: 0;
+      font-size: 12px;
+      opacity: 0.9
+    }
+
+    /* Layout */
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    /* Sidebar */
+    nav {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 12px;
+      height: calc(100vh - 96px);
+      overflow: auto;
+      box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--srm-blue);
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .menu-btn:hover {
+      background: #f1f5f9
+    }
+
+    .menu-btn.active {
+      background: linear-gradient(90deg, #edf5ff, #e8f1ff);
+      border-left: 4px solid var(--srm-blue);
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* Main content */
+    main {
+      padding: 0 6px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+    }
+
+    h2 {
+      margin: 0 0 12px 0;
+      color: var(--srm-blue)
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #e6edf5;
+      text-align: left;
+      font-size: 14px
+    }
+
+    th {
+      background: #f3f7ff;
+      color: var(--srm-blue)
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600
+    }
+
+    .btn-primary {
+      background: var(--srm-blue);
+      color: white
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid #e6edf5
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white
+    }
+
+    /* small controls */
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--muted)
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d6e1f5;
+      background: #fbfdff
+    }
+
+    .row {
+      display: flex;
+      gap: 12px
+    }
+
+    .col {
+      flex: 1
+    }
+
+    /* responsive */
+    @media(max-width:980px) {
+      .app {
+        grid-template-columns: 1fr;
+        padding: 12px
+      }
+
+      nav {
+        height: auto;
+        display: flex;
+        overflow: auto;
+        margin-bottom: 12px
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* tiny */
+    .muted {
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px
+    }
+
+    .pill {
+      background: #eef4ff;
+      color: var(--srm-blue);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700
+    }
+
+    .id-card {
+      width: 260px;
+      padding: 12px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fff, #f7fbff);
+      border: 1px solid #e6f0ff
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo">SRM</div>
+      <div>
+        <h1>SRM Student Portal</h1>
+        <p>Simple offline demo • HTML + JavaScript</p>
+      </div>
+    </div>
+    <div class="center">
+      <div class="pill" id="studentNameTop">Syed Nagul Meera</div>
+    </div>
+  </header>
+
+  <div class="app">
+    <!-- SIDEBAR -->
+    <nav aria-label="main navigation">
+      <button class="menu-btn active" data-page="home" onclick="navTo(event)">&nbsp; Home</button>
+      <button class="menu-btn" data-page="profile" onclick="navTo(event)">&nbsp; Profile</button>
+      <button class="menu-btn" data-page="idcard" onclick="navTo(event)">&nbsp; Student ID Card</button>
+      <button class="menu-btn" data-page="timetable" onclick="navTo(event)">&nbsp; Timetable</button>
+      <button class="menu-btn" data-page="subjects" onclick="navTo(event)">&nbsp; Subjects List</button>
+      <button class="menu-btn" data-page="registration" onclick="navTo(event)">&nbsp; Course Registration</button>
+      <button class="menu-btn" data-page="marks" onclick="navTo(event)">&nbsp; Marks & Results</button>
+      <button class="menu-btn" data-page="attendance" onclick="navTo(event)">&nbsp; Attendance</button>
+      <button class="menu-btn" data-page="fees" onclick="navTo(event)">&nbsp; Fees Status</button>
+      <button class="menu-btn" data-page="exam" onclick="navTo(event)">&nbsp; Exam Schedule</button>
+      <button class="menu-btn" data-page="hallticket" onclick="navTo(event)">&nbsp; Hall Ticket</button>
+      <button class="menu-btn" data-page="notifications" onclick="navTo(event)">&nbsp; Notifications</button>
+      <button class="menu-btn" data-page="feedback" onclick="navTo(event)">&nbsp; Feedback</button>
+      <div style="height:10px"></div>
+      <div class="small muted">This is an offline demo. Data is stored in JavaScript memory only.</div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+      <!-- HOME -->
+      <section id="home" class="card">
+        <h2>Welcome, <span id="studentName">Syed Nagul Meera</span></h2>
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <strong>Quick Overview</strong>
+              <p class="muted">Roll No: <span id="rollNo">RA2111029010001</span></p>
+              <p class="muted">Branch: <span id="branch">CSE</span> • Year: <span id="year">2</span></p>
+              <p class="muted">GPA (last sem): <strong id="gpaDisplay">8.7</strong></p>
+            </div>
+
+            <div class="card">
+              <strong>Announcements</strong>
+              <ul id="annList">
+                <!-- dynamic -->
+              </ul>
+            </div>
+
+            <div class="card">
+              <strong>Next Exam</strong>
+              <p id="nextExam" class="muted">No upcoming exam</p>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card center">
+              <div>
+                <div style="font-size:12px;color:var(--muted)">Attendance Avg</div>
+                <div style="font-size:28px;font-weight:800;margin-top:6px" id="attendanceAvg">93%</div>
+                <div class="muted" style="margin-top:6px">Good standing</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <strong>Registered Courses</strong>
+              <ul id="registeredCourses"></ul>
+              <div style="height:8px"></div>
+              <button class="btn btn-ghost" onclick="navToPage('registration')">Manage Courses</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="profile" class="card" style="display:none">
+        <h2>Profile</h2>
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <h3>Personal Details</h3>
+              <p><strong>Name:</strong> <span id="pName">Syed Nagul Meera</span></p>
+              <p><strong>Roll No:</strong> <span id="pRoll">RA2111029010001</span></p>
+              <p><strong>Department:</strong> <span id="pDept">Computer Science Engineering</span></p>
+              <p><strong>Year / Section:</strong> 2nd Year / A</p>
+              <p><strong>Email:</strong> john.doe@example.com</p>
+              <p><strong>Phone:</strong> +91 90000 00000</p>
+            </div>
+
+            <div class="card">
+              <h3>Contact Address</h3>
+              <p class="muted">123, Student Hostel, SRM Nagar, Kattankulathur, Tamil Nadu, India</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="id-card">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-weight:800;font-size:16px;color:var(--srm-blue)">SRM</div>
+                <div style="font-size:12px;color:var(--muted)">Student</div>
+              </div>
+              <hr style="margin:10px 0;border:none;border-top:1px solid #eef5ff">
+              <div style="font-weight:700;font-size:16px" id="cardName">Syed Nagul Meera</div>
+              <div class="muted" id="cardRoll">RA2111029010001</div>
+              <div style="margin-top:8px"><strong>Branch:</strong> <span id="cardBranch">CSE</span></div>
+              <div style="margin-top:8px"><strong>Year:</strong> 2</div>
+              <div style="margin-top:8px;font-size:12px;color:var(--muted)">Valid Till: 30 Jun 2026</div>
+              <div style="margin-top:10px" class="center">
+                <button class="btn btn-primary" onclick="printID()">Print ID</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ID CARD PAGE (big view / printable) -->
+      <section id="idcard" class="card" style="display:none">
+        <h2>Student ID Card</h2>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <div class="id-card" id="idCardLarge">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:800;font-size:22px;color:var(--srm-blue)">SRM</div>
+              <div style="font-size:12px;color:var(--muted)">Student ID</div>
+            </div>
+            <hr style="margin:10px 0;border:none;border-top:1px solid #eef5ff">
+            <div style="font-weight:800;font-size:18px" id="idNameLarge">Syed Nagul Meera</div>
+            <div class="muted" id="idRollLarge">RA2111029010001</div>
+            <div style="margin-top:8px"><strong>Branch:</strong> <span id="idBranchLarge">Computer Science
+                Engineering</span></div>
+            <div style="margin-top:6px"><strong>Year:</strong> 2nd Year</div>
+            <div style="margin-top:10px" class="muted">Valid Till: 30 Jun 2026</div>
+          </div>
+
+          <div style="flex:1;min-width:260px">
+            <p class="muted">You can print or save the ID. It uses browser's print function.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" onclick="printElement('idCardLarge')">Print / Save</button>
+              <button class="btn btn-ghost" onclick="downloadID()">Download (PNG)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMETABLE -->
+      <section id="timetable" class="card" style="display:none">
+        <h2>Timetable</h2>
+        <p class="muted">Semester Timetable (Sample)</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>9:00 - 10:30</th>
+              <th>10:45 - 12:15</th>
+              <th>1:15 - 2:45</th>
+              <th>3:00 - 4:30</th>
+            </tr>
+          </thead>
+          <tbody id="timetableBody">
+            <!-- dynamic -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SUBJECTS -->
+      <section id="subjects" class="card" style="display:none">
+        <h2>Subjects List</h2>
+        <p class="muted">Available subjects for this semester</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Subject</th>
+              <th>Credits</th>
+            </tr>
+          </thead>
+          <tbody id="subjectsBody"></tbody>
+        </table>
+      </section>
+
+      <!-- COURSE REGISTRATION -->
+      <section id="registration" class="card" style="display:none">
+        <h2>Course Registration</h2>
+        <p class="muted">Add or remove subjects from your registered courses (client-side only)</p>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+          <div style="flex:1;min-width:220px">
+            <label>Select Subject to Register</label>
+            <select id="regSelect"></select>
+          </div>
+          <div style="width:160px">
+            <label>&nbsp;</label>
+            <button class="btn btn-primary" onclick="registerCourse()">Register</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Your Registered Courses</h3>
+          <ul id="regList"></ul>
+        </div>
+      </section>
+
+      <!-- MARKS & RESULTS -->
+      <section id="marks" class="card" style="display:none">
+        <h2>Marks & Results</h2>
+        <div class="grid-2">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Max</th>
+                  <th>Score</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody id="marksBody"></tbody>
+            </table>
+          </div>
+          <aside>
+            <div class="card">
+              <h3>GPA Summary</h3>
+              <p>Semester GPA: <strong id="semGPA">--</strong></p>
+              <p>CGPA (cumulative): <strong id="cgpa">--</strong></p>
+            </div>
+            <div style="height:10px"></div>
+            <div class="card">
+              <button class="btn btn-primary" onclick="calculateGPA()">Recalculate GPA</button>
+              <button class="btn btn-ghost" onclick="downloadResults()">Download Results</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ATTENDANCE -->
+      <section id="attendance" class="card" style="display:none">
+        <h2>Attendance</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Attended</th>
+              <th>Total</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody id="attBody"></tbody>
+        </table>
+      </section>
+
+      <!-- FEES -->
+      <section id="fees" class="card" style="display:none">
+        <h2>Fees Status</h2>
+        <p class="muted">Fee ledger for current academic year</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Particular</th>
+              <th>Amount (INR)</th>
+              <th>Paid</th>
+            </tr>
+          </thead>
+          <tbody id="feesBody"></tbody>
+        </table>
+        <div style="margin-top:12px" class="center">
+          <button class="btn btn-primary" onclick="simulatePay()">Pay Pending (Simulate)</button>
+        </div>
+      </section>
+
+      <!-- EXAM SCHEDULE -->
+      <section id="exam" class="card" style="display:none">
+        <h2>Exam Schedule</h2>
+        <p class="muted">Upcoming internal/exam schedule</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Subject</th>
+              <th>Venue</th>
+            </tr>
+          </thead>
+          <tbody id="examBody"></tbody>
+        </table>
+      </section>
+
+      <!-- HALL TICKET -->
+      <section id="hallticket" class="card" style="display:none">
+        <h2>Hall Ticket</h2>
+        <p class="muted">Generate a printable hall ticket for the upcoming exam</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <label>Select Exam</label>
+            <select id="examSelect"></select>
+          </div>
+          <div style="width:160px">
+            <label>&nbsp;</label>
+            <button class="btn btn-primary" onclick="generateHallTicket()">Generate Ticket</button>
+          </div>
+        </div>
+        <div id="hallTicketArea" style="margin-top:12px"></div>
+      </section>
+
+      <!-- NOTIFICATIONS -->
+      <section id="notifications" class="card" style="display:none">
+        <h2>Notifications</h2>
+        <p class="muted">Important messages from the college</p>
+        <ul id="notifsList"></ul>
+        <div style="margin-top:12px">
+          <label>Add Notification</label>
+          <textarea id="newNotif" rows="2"></textarea>
+          <div style="height:8px"></div>
+          <button class="btn btn-primary" onclick="addNotification()">Add</button>
+        </div>
+      </section>
+
+      <!-- FEEDBACK -->
+      <section id="feedback" class="card" style="display:none">
+        <h2>Feedback & Complaints</h2>
+        <p class="muted">Share your thoughts or report issues.</p>
+        <div style="max-width:500px">
+          <label>Type</label>
+          <select id="fbType">
+            <option value="complaint">Complaint</option>
+            <option value="suggestion">Suggestion</option>
+            <option value="other">Other</option>
+          </select>
+          <br>
+          <label>Message</label>
+          <textarea id="fbMessage" rows="4" placeholder="Describe here..."></textarea>
+          <div style="height:12px"></div>
+          <button class="btn btn-primary" onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer style="text-align:center;padding:20px;color:var(--muted);font-size:13px;font-weight:600">
+    Done by Syed Nagulmeera
+  </footer>
+
+  <script>
+    /* ----------------------------
+       Sample Data (client-side)
+       ---------------------------- */
+    const student = {
+      name: "Syed Nagul Meera",
+      roll: "RA2111029010001",
+      branch: "Computer Science Engineering",
+      shortBranch: "CSE",
+      year: 2,
+      email: "john.doe@example.com",
+      phone: "+91 90000 00000"
+    };
+
+    const subjects = [
+      { code: "CS201", name: "Data Structures", credits: 4 },
+      { code: "CS202", name: "Database Systems", credits: 4 },
+      { code: "MA201", name: "Mathematics III", credits: 3 },
+      { code: "CS203", name: "Operating Systems", credits: 4 },
+      { code: "CS204", name: "Python Programming", credits: 3 },
+      { code: "HS201", name: "Communicative English", credits: 2 }
+    ];
+
+    let registered = ["CS201", "CS204", "MA201"]; // initial registered
+    const timetable = [
+      { day: "Monday", slots: ["Data Structures", "Database Systems", "Lunch", "Python Programming"] },
+      { day: "Tuesday", slots: ["Mathematics III", "Operating Systems", "Lunch", "Data Structures"] },
+      { day: "Wednesday", slots: ["Python Programming", "Database Systems", "Lunch", "Operating Systems"] },
+      { day: "Thursday", slots: ["Mathematics III", "Data Structures", "Lunch", "HS: English"] },
+      { day: "Friday", slots: ["Operating Systems", "Python Programming", "Lunch", "Database Systems"] }
+    ];
+
+    const marks = [
+      { code: "CS201", name: "Data Structures", max: 100, score: 90 },
+      { code: "CS202", name: "Database Systems", max: 100, score: 84 },
+      { code: "MA201", name: "Mathematics III", max: 100, score: 88 },
+      { code: "CS203", name: "Operating Systems", max: 100, score: 82 },
+      { code: "CS204", name: "Python Programming", max: 100, score: 93 },
+      { code: "HS201", name: "Communicative English", max: 100, score: 78 }
+    ];
+
+    const attendance = [
+      { code: "CS201", attended: 42, total: 45 },
+      { code: "CS202", attended: 40, total: 45 },
+      { code: "MA201", attended: 44, total: 46 },
+      { code: "CS203", attended: 41, total: 45 },
+      { code: "CS204", attended: 45, total: 48 },
+      { code: "HS201", attended: 43, total: 45 }
+    ];
+
+    const feesLedger = [
+      { part: "Tuition Fee", amount: 150000, paid: 150000 },
+      { part: "Exam Fee", amount: 2000, paid: 0 },
+      { part: "Hostel Fee", amount: 30000, paid: 30000 },
+      { part: "Library Fine", amount: 500, paid: 0 }
+    ];
+
+    const exams = [
+      { date: "2025-12-12", time: "09:00 - 12:00", subject: "Data Structures", venue: "Exam Hall A" },
+      { date: "2025-12-14", time: "09:00 - 12:00", subject: "Python Programming", venue: "Exam Hall B" },
+      { date: "2025-12-16", time: "09:00 - 12:00", subject: "Mathematics III", venue: "Exam Hall A" }
+    ];
+
+    let announcements = [
+      "Mid-term exams start from 12th December.",
+      "Assignment 2 submission deadline: 10th December.",
+      "Guest lecture on AI: 8th December."
+    ];
+
+    let notifications = [
+      { time: "2025-11-30", text: "Library will remain closed on 6th Dec due to maintenance." },
+      { time: "2025-11-28", text: "Sports day registration open." }
+    ];
+
+    /* ----------------------------
+       Initialization & Render
+       ---------------------------- */
+    function init() {
+      // Basic profile fill
+      document.getElementById("studentName").innerText = student.name;
+      document.getElementById("studentNameTop").innerText = student.name;
+      document.getElementById("rollNo").innerText = student.roll;
+      document.getElementById("branch").innerText = student.shortBranch;
+      document.getElementById("year").innerText = student.year;
+      document.getElementById("pName").innerText = student.name;
+      document.getElementById("pRoll").innerText = student.roll;
+      document.getElementById("pDept").innerText = student.branch;
+      document.getElementById("cardName").innerText = student.name;
+      document.getElementById("cardRoll").innerText = student.roll;
+      document.getElementById("cardBranch").innerText = student.shortBranch;
+      document.getElementById("idNameLarge").innerText = student.name;
+      document.getElementById("idRollLarge").innerText = student.roll;
+      document.getElementById("idBranchLarge").innerText = student.branch;
+      document.getElementById("gpaDisplay").innerText = calcGPA().toFixed(2);
+
+      // announcements
+      const annList = document.getElementById("annList");
+      annList.innerHTML = "";
+      announcements.forEach(a => {
+        const li = document.createElement("li");
+        li.innerText = a;
+        annList.appendChild(li);
+      });
+
+      // next exam
+      const now = new Date();
+      const upcoming = exams.find(e => new Date(e.date) >= now);
+      document.getElementById("nextExam").innerText = upcoming ? `${upcoming.subject} on ${upcoming.date}` : "No upcoming exams";
+
+      // Registered courses list
+      renderRegistered();
+
+      // Timetable
+      const tbody = document.getElementById("timetableBody");
+      tbody.innerHTML = "";
+      timetable.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${row.day}</td><td>${row.slots[0] || ''}</td><td>${row.slots[1] || ''}</td><td>${row.slots[2] || ''}</td><td>${row.slots[3] || ''}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      // subjects table
+      const subBody = document.getElementById("subjectsBody");
+      subBody.innerHTML = "";
+      subjects.forEach(s => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${s.code}</td><td>${s.name}</td><td>${s.credits}</td>`;
+        subBody.appendChild(tr);
+      });
+
+      // registration select dropdown
+      const regSelect = document.getElementById("regSelect");
+      regSelect.innerHTML = "";
+      subjects.forEach(s => {
+        if (!registered.includes(s.code)) {
+          const opt = document.createElement("option");
+          opt.value = s.code;
+          opt.innerText = `${s.code} — ${s.name}`;
+          regSelect.appendChild(opt);
+        }
+      });
+
+      // marks table
+      renderMarks();
+
+      // attendance table
+      renderAttendance();
+
+      // fees table
+      renderFees();
+
+      // exams table
+      const examBody = document.getElementById("examBody");
+      examBody.innerHTML = "";
+      exams.forEach(ex => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${ex.date}</td><td>${ex.time}</td><td>${ex.subject}</td><td>${ex.venue}</td>`;
+        examBody.appendChild(tr);
+      });
+
+      // exam select for hallticket
+      const examSelect = document.getElementById("examSelect");
+      examSelect.innerHTML = "";
+      exams.forEach((ex, i) => {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.innerText = `${ex.date} — ${ex.subject}`;
+        examSelect.appendChild(opt);
+      });
+
+      // notifications
+      renderNotifs();
+
+      // registered courses quick list
+      renderRegisteredQuick();
+    }
+
+    /* ----------------------------
+       Navigation
+       ---------------------------- */
+    function navTo(e) {
+      const page = e.currentTarget.dataset.page;
+      navToPage(page);
+    }
+    function navToPage(page) {
+      // hide all sections
+      document.querySelectorAll("main section").forEach(s => s.style.display = "none");
+      // show requested
+      const el = document.getElementById(page);
+      if (el) el.style.display = "block";
+      // active menu
+      document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
+      const btn = document.querySelector(`.menu-btn[data-page="${page}"]`);
+      if (btn) btn.classList.add("active");
+      // if moving to marks, recalc
+      if (page === "marks") calculateGPA();
+    }
+
+    /* ----------------------------
+       Registered courses UI
+       ---------------------------- */
+    function renderRegistered() {
+      const ul = document.getElementById("regList");
+      ul.innerHTML = "";
+      if (registered.length === 0) { ul.innerHTML = "<li class='muted'>No courses registered.</li>"; return; }
+      registered.forEach(code => {
+        const s = subjects.find(x => x.code === code);
+        const li = document.createElement("li");
+        li.style.marginBottom = "8px";
+        li.innerHTML = `${code} — ${s ? s.name : '(unknown)'} <button style="float:right" class="btn btn-ghost" onclick="unregisterCourse('${code}')">Remove</button>`;
+        ul.appendChild(li);
+      });
+      renderRegisteredQuick();
+    }
+    function renderRegisteredQuick() {
+      const rc = document.getElementById("registeredCourses");
+      rc.innerHTML = "";
+      registered.forEach(c => {
+        const li = document.createElement("li"); li.innerText = c; rc.appendChild(li);
+      });
+    }
+
+    function registerCourse() {
+      const sel = document.getElementById("regSelect");
+      const code = sel.value;
+      if (!code) { alert("No subject selected or all subjects registered."); return; }
+      if (!registered.includes(code)) {
+        registered.push(code);
+        // remove option from dropdown
+        sel.querySelectorAll("option").forEach(o => { if (o.value === code) o.remove(); });
+        renderRegistered();
+        alert(code + " registered.");
+      }
+    }
+    function unregisterCourse(code) {
+      registered = registered.filter(c => c !== code);
+      // add back to select
+      const sel = document.getElementById("regSelect");
+      const s = subjects.find(x => x.code === code);
+      if (s) {
+        const opt = document.createElement("option");
+        opt.value = s.code; opt.innerText = `${s.code} — ${s.name}`;
+        sel.appendChild(opt);
+      }
+      renderRegistered();
+    }
+
+    /* ----------------------------
+       Marks / GPA
+       ---------------------------- */
+    function renderMarks() {
+      const tbody = document.getElementById("marksBody");
+      tbody.innerHTML = "";
+      marks.forEach(m => {
+        const grade = scoreToGrade(m.score);
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${m.name} (${m.code})</td><td>${m.max}</td><td>${m.score}</td><td>${grade}</td>`;
+        tbody.appendChild(tr);
+      });
+      calculateGPA();
+    }
+
+    function scoreToGrade(s) {
+      if (s >= 90) return "A+";
+      if (s >= 80) return "A";
+      if (s >= 70) return "B";
+      if (s >= 60) return "C";
+      return "F";
+    }
+
+    function calcGPA() {
+      // simple gpa: map grade to points (A+ 10, A 9, B 8, C 7, F 0), weighted by credits
+      let totalPoints = 0, totalCredits = 0;
+      marks.forEach(m => {
+        const subj = subjects.find(s => s.code === m.code);
+        const credits = subj ? subj.credits : 3;
+        const points = gradeToPoints(scoreToGrade(m.score));
+        totalPoints += points * credits;
+        totalCredits += credits;
+      });
+      const gpa = totalCredits ? totalPoints / totalCredits : 0;
+      return gpa;
+    }
+
+    function gradeToPoints(g) {
+      switch (g) {
+        case "A+": return 10;
+        case "A": return 9;
+        case "B": return 8;
+        case "C": return 7;
+        default: return 0;
+      }
+    }
+
+    function calculateGPA() {
+      const gpa = calcGPA();
+      document.getElementById("semGPA").innerText = gpa.toFixed(2);
+      // for demo cgpa we just average with a fixed prior value
+      const prevCGPA = 8.4;
+      const cgpa = ((prevCGPA + gpa) / 2).toFixed(2);
+      document.getElementById("cgpa").innerText = cgpa;
+      document.getElementById("gpaDisplay").innerText = gpa.toFixed(2);
+    }
+
+    function downloadResults() {
+      const payload = {
+        student,
+        marks,
+        gpa: document.getElementById("semGPA").innerText
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = `${student.roll}_results.json`;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    /* ----------------------------
+       Attendance
+       ---------------------------- */
+    function renderAttendance() {
+      const t = document.getElementById("attBody");
+      t.innerHTML = "";
+      let totalAtt = 0, totalTot = 0;
+      attendance.forEach(a => {
+        const pct = ((a.attended / a.total) * 100).toFixed(0) + "%";
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${a.code}</td><td>${a.attended}</td><td>${a.total}</td><td>${pct}</td>`;
+        t.appendChild(tr);
+        totalAtt += a.attended; totalTot += a.total;
+      });
+      const avg = totalTot ? Math.round((totalAtt / totalTot) * 100) : 0;
+      document.getElementById("attendanceAvg").innerText = avg + "%";
+    }
+
+    /* ----------------------------
+       Fees
+       ---------------------------- */
+    function renderFees() {
+      const t = document.getElementById("feesBody");
+      t.innerHTML = "";
+      feesLedger.forEach(f => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${f.part}</td><td>${f.amount.toLocaleString('en-IN')}</td><td>${f.paid.toLocaleString('en-IN')}</td>`;
+        t.appendChild(tr);
+      });
+    }
+
+    function simulatePay() {
+      feesLedger.forEach(f => { if (f.paid < f.amount) f.paid = f.amount; });
+      renderFees();
+      alert("Pending fees marked as paid (simulated).");
+    }
+
+    /* ----------------------------
+       Exams / Hall Ticket
+       ---------------------------- */
+    function generateHallTicket() {
+      const idx = Number(document.getElementById("examSelect").value);
+      const ex = exams[idx];
+      const html = `
+      <div style="padding:18px;font-family:Arial">
+        <h2 style="margin:0;color:#002f6c">SRM Institute of Science and Technology</h2>
+        <p style="margin:2px 0 10px 0;color:#555">Hall Ticket • ${ex.date}</p>
+        <div style="border:1px solid #e6eefc;padding:12px;border-radius:8px">
+          <p><strong>Name:</strong> ${student.name}</p>
+          <p><strong>Roll No:</strong> ${student.roll}</p>
+          <p><strong>Subject:</strong> ${ex.subject}</p>
+          <p><strong>Date & Time:</strong> ${ex.date} • ${ex.time}</p>
+          <p><strong>Venue:</strong> ${ex.venue}</p>
+        </div>
+        <p style="margin-top:12px;color:#777">Take a printout of this page and carry it to the exam hall.</p>
+      </div>
+    `;
+      const area = document.getElementById("hallTicketArea");
+      area.innerHTML = "";
+      const frame = document.createElement("div");
+      frame.className = "card";
+      frame.innerHTML = html + `<div style="margin-top:12px"><button class="btn btn-primary" onclick="printHall()">Print Hall Ticket</button></div>`;
+      area.appendChild(frame);
+    }
+
+    function printHall() {
+      const area = document.getElementById("hallTicketArea");
+      if (!area.innerHTML) { alert("Generate a hall ticket first."); return; }
+      const w = window.open("", "_blank");
+      w.document.write(`<html><head><title>Hall Ticket</title></head><body>${area.innerHTML}</body></html>`);
+      w.document.close();
+      w.focus();
+      setTimeout(() => { w.print(); }, 300);
+    }
+
+    /* ----------------------------
+       Notifications
+       ---------------------------- */
+    function renderNotifs() {
+      const ul = document.getElementById("notifsList");
+      ul.innerHTML = "";
+      notifications.forEach(n => {
+        const li = document.createElement("li"); li.style.marginBottom = "8px";
+        const encoded = encodeURIComponent(n.text);
+        li.innerHTML = `<strong>${n.time}</strong> — ${n.text} <button style="float:right" class="btn btn-ghost" onclick="removeNotif('${n.time}','${encoded}')">Remove</button>`;
+        ul.appendChild(li);
+      });
+    }
+    function addNotification() {
+      const text = document.getElementById("newNotif").value.trim();
+      if (!text) { alert("Enter notification text."); return; }
+      const dt = new Date().toISOString().slice(0, 10);
+      notifications.unshift({ time: dt, text });
+      document.getElementById("newNotif").value = "";
+      renderNotifs();
+    }
+
+    function submitFeedback() {
+      const type = document.getElementById("fbType").value;
+      const msg = document.getElementById("fbMessage").value;
+      if (!msg) return alert("Please enter a message.");
+
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, message: msg, date: new Date().toISOString() })
+      })
+        .then(r => r.json())
+        .then(d => {
+          alert("Feedback submitted successfully!");
+          document.getElementById("fbMessage").value = "";
+        })
+        .catch(e => alert("Error submitting feedback"));
+    }
+    function removeNotif(time, encodedText) {
+      const text = decodeURIComponent(encodedText);
+      notifications = notifications.filter(n => !(n.time === time && n.text === text));
+      renderNotifs();
+    }
+
+    /* ----------------------------
+       Utilities: print / download ID
+       ---------------------------- */
+    function printElement(id) {
+      const el = document.getElementById(id);
+      if (!el) { alert("Nothing to print."); return; }
+      const w = window.open("", "_blank");
+      w.document.write(`<html><head><title>Print</title></head><body>${el.outerHTML}</body></html>`);
+      w.document.close();
+      setTimeout(() => w.print(), 300);
+    }
+
+    // Download ID as SVG snapshot (simple)
+    function downloadID() {
+      const name = student.name, roll = student.roll, branch = student.branch;
+      const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="600" height="360">
+        <rect width="100%" height="100%" fill="#fff"/>
+        <rect x="16" y="16" width="568" height="328" rx="16" fill="#f7fbff" stroke="#e6f0ff"/>
+        <text x="40" y="64" font-family="Arial" font-size="28" fill="#002f6c" font-weight="700">SRM Institute</text>
+        <text x="40" y="108" font-family="Arial" font-size="20" fill="#111">${name}</text>
+        <text x="40" y="140" font-family="Arial" font-size="16" fill="#555">Roll: ${roll}</text>
+        <text x="40" y="168" font-family="Arial" font-size="16" fill="#555">Branch: ${branch}</text>
+      </svg>
+    `;
+      const blob = new Blob([svg], { type: "image/svg+xml" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = `${student.roll}_id.svg`;
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    function printID() {
+      printElement('idCardLarge');
+    }
+
+    /* ----------------------------
+       Startup
+       ---------------------------- */
+    init();
+    // default page
+    navToPage('home');
+  </script>
+</body>
+
+</html>
